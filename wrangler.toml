@@ -1,17 +1,5 @@
 name = "abu-rass-api"
 account_id = "7e1b26a989003387314aeedee5ee61f3"
 workers_dev = true
-
-# Ensure Cloudflare knows which file is the entry point
 main = "index.js"
-
-# Compatibility settings
 compatibility_date = "2024-02-16"
-
-# Define build settings (optional, remove if unnecessary)
-[build]
-command = "npx wrangler deploy"
-
-# Add environment variables if needed
-[vars]
-ENVIRONMENT = "production"
