@@ -1,27 +1,27 @@
-import cheerio from "cheerio";
-
 export default {
-  async fetch(request) {
-    const url = "https://aburassrestaurant.com/";
-    const response = await fetch(url);
-    const html = await response.text();
-    const $ = cheerio.load(html);
-
-    // Adjust these selectors based on actual HTML structure
-    let menuItems = $(".menu-list li")
-      .map((i, el) => $(el).text().trim())
-      .get();
-
-    let hours = $(".business-hours")
-      .map((i, el) => $(el).text().trim())
-      .get();
-
-    if (menuItems.length === 0) menuItems = ["Menu not found"];
-    if (hours.length === 0) hours = ["Hours not available"];
-
-    return new Response(
-      JSON.stringify({ menu: menuItems, hours: hours }),
-      { headers: { "Content-Type": "application/json" } }
-    );
-  }
-};
+    async fetch(request) {
+      const veloeatMenuUrl = "https://www.veloeatmerchant.com/ordering/restaurant/menu?restaurant_uid=a565337c-ea69-4d6e-a70a-0cf8672a1554";
+  
+      const response = await fetch(veloeatMenuUrl, {
+        headers: { "User-Agent": "Mozilla/5.0" }, // Some sites block bots; this helps bypass that
+      });
+  
+      const html = await response.text();
+  
+      // Use DOMParser to parse the HTML response
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+  
+      // Adjust these selectors based on the actual HTML structure
+      let menuItems = [...doc.querySelectorAll(".menu-item-name")]
+        .map(el => el.textContent.trim());
+  
+      if (menuItems.length === 0) menuItems = ["Menu not found"];
+  
+      return new Response(
+        JSON.stringify({ menu: menuItems }),
+        { headers: { "Content-Type": "application/json" } }
+      );
+    }
+  };
+  
