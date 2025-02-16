@@ -1,0 +1,8 @@
+name = "abu-rass-api"
+type = "javascript"
+
+account_id = "7e1b26a989003387314aeedee5ee61f3"
+workers_dev = true
+
+route = ""
+zone_id = ""
