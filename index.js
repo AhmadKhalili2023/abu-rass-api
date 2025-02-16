@@ -4,7 +4,7 @@ export default {
       const response = await fetch(url);
       const text = await response.text();
   
-      // Extract menu items and hours (Modify based on actual website structure)
+      // Extract menu items and hours (Modify as needed)
       const menuMatches = text.match(/<li class="menu-item">(.*?)<\/li>/g);
       const hoursMatch = text.match(/<p class="hours">(.*?)<\/p>/);
   
@@ -16,3 +16,4 @@ export default {
       });
     }
   };
+  
